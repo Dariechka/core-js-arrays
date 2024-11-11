@@ -341,8 +341,16 @@ function calculateBalance(arr) {
  *    createChunks([10, 20, 30, 40, 50], 1) => [[10], [20], [30], [40], [50]]
  */
 function createChunks(arr, chunkSize) {
-  const storage = [];
-  
+  return arr.reduce(
+    (acc, item) => {
+      if (acc[acc.length - 1].length === chunkSize) {
+        acc.push([]);
+      }
+      acc[acc.length - 1].push(item);
+      return acc;
+    },
+    [[]]
+  );
 }
 
 /**
@@ -416,8 +424,15 @@ function getFalsyValuesCount(arr) {
  *                              [0,0,0,1,0],
  *                              [0,0,0,0,1]]
  */
-function getIdentityMatrix(/* n */) {
-  throw new Error('Not implemented');
+function getIdentityMatrix(n) {
+  return Array.from(Array(n), (item, index) =>
+    Array.from(Array(n), (nestedItem, nestedIndex) => {
+      if (index === nestedIndex) {
+        return 1;
+      }
+      return 0;
+    })
+  );
 }
 
 /**
@@ -546,8 +561,13 @@ function findLongestIncreasingSubsequence(nums) {
  *  propagateItemsByPositionIndex([ 'a', 'b', 'c', null ]) => [ 'a', 'b', 'b', 'c', 'c', 'c',  null, null, null, null ]
  *  propagateItemsByPositionIndex([ 1,2,3,4,5 ]) => [ 1, 2, 2, 3, 3, 3, 4, 4, 4, 4, 5, 5, 5, 5, 5 ]
  */
-function propagateItemsByPositionIndex(/* arr */) {
-  throw new Error('Not implemented');
+function propagateItemsByPositionIndex(arr) {
+  return arr
+    .reduce((acc, item, index) => {
+      acc.push(Array.from(Array(index + 1), () => item));
+      return acc;
+    }, [])
+    .flatMap((item) => item);
 }
 
 /**
