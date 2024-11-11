@@ -340,8 +340,9 @@ function calculateBalance(arr) {
  *    createChunks(['a', 'b', 'c', 'd', 'e'], 2) => [['a', 'b'], ['c', 'd'], ['e']]
  *    createChunks([10, 20, 30, 40, 50], 1) => [[10], [20], [30], [40], [50]]
  */
-function createChunks(/* arr, chunkSize */) {
-  throw new Error('Not implemented');
+function createChunks(arr, chunkSize) {
+  const storage = [];
+  
 }
 
 /**
@@ -583,8 +584,20 @@ function shiftArray(arr, n) {
  *   sortDigitNamesByNumericOrder([ 'nine','eight','nine','eight' ]) => [ 'eight','eight','nine','nine']
  *   sortDigitNamesByNumericOrder([ 'one','one','one','zero' ]) => [ 'zero','one','one','one' ]
  */
-function sortDigitNamesByNumericOrder(/* arr */) {
-  throw new Error('Not implemented');
+function sortDigitNamesByNumericOrder(arr) {
+  const order = [
+    'one',
+    'two',
+    'three',
+    'four',
+    'five',
+    'six',
+    'seven',
+    'eight',
+    'nine',
+    'ten',
+  ];
+  return arr.sort((a, b) => order.indexOf(a) - order.indexOf(b));
 }
 
 /**
@@ -606,8 +619,17 @@ function sortDigitNamesByNumericOrder(/* arr */) {
  *   swapHeadAndTail([]) => []
  *
  */
-function swapHeadAndTail(/* arr */) {
-  throw new Error('Not implemented');
+function swapHeadAndTail(arr) {
+  if (arr.length === 0 || arr.length === 1) return arr;
+  const centre = arr.length / 2;
+  if (Math.ceil(centre) === centre) {
+    return arr.slice(centre).concat(arr.slice(0, centre));
+  }
+  const arrNew = arr
+    .slice(Math.ceil(centre))
+    .concat(arr.slice(0, Math.floor(centre)));
+  arrNew.splice(Math.floor(centre), 0, arr[Math.floor(centre)]);
+  return arrNew;
 }
 
 module.exports = {
